@@ -63,8 +63,11 @@ module.exports = class stcAdapter {
 
     return `
     ${blockStart}
-    ls_cookie, _ := c.Cookie("${lsCookie}")
-    stc_ls_cookie := ls_cookie.Value
+    stc_ls_cookie := ""
+    ls_cookie, _ := c.Cookie("stc_mlook")
+    if ls_cookie != nil {
+      stc_ls_cookie = ls_cookie.Value
+    }
     stc_cookie_length := len(stc_ls_cookie)
     for i := 0; i < stc_cookie_length; i += 2 {
       stc_ls_cookies[ string(stc_ls_cookie[i]) ] = string(stc_ls_cookie[i+1])
